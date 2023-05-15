@@ -1,0 +1,658 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,500;0,600;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&family=Poppins:ital,wght@0,100;0,300;0,500;0,600;1,300&display=swap');
+
+
+:root {
+    --bg-color: #2e333d;
+    --menu-bg-color: #131313;
+    --active-color: #6b8afd;
+    --text-color: #fff;
+    --transition-color: .24s;
+    --menu-active-bg: #2e343d;
+    --button-color: #848599;
+    --radius: 15px;
+    --padding: 1rem;
+    --fields-bg: #202329;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Archivo', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+/* Стилизация скроллбара */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+/* Стилизация ползунка */
+/* ::-webkit-scrollbar-thumb {
+    background-color: #beeaff;
+    border-radius: 5px;
+} */
+
+/* Стилизация трека (фона скроллбара) */
+/* ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+} */
+
+/* Стилизация кнопки скроллбара */
+/* ::-webkit-scrollbar-button {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+/* Стилизация углового элемента */
+/* ::-webkit-scrollbar-corner {
+    background-color: #f1f1f1;
+}  */
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+#chatbox {
+    height: 100vh;
+    margin: auto;
+    display: flex;
+}
+
+.view {
+    width: calc(100% - 103px);
+    height: 100%;
+    background: #202329;
+    position: relative;
+}
+
+.menubar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: var(--menu-bg-color);
+    user-select: none;
+    width: max-content;
+}
+
+.menubar .logo {
+    align-self: center;
+}
+
+.logo a {
+    font-size: 2rem;
+    color: var(--button-color);
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 1rem;
+}
+
+.menu .menu-one ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-one ul li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: var(--button-color);
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: .6rem;
+    transition: var(--transition-color);
+}
+
+.menu-one ul .chosen a {
+    background-color: var(--menu-active-bg);
+    color: var(--text-color);
+}
+
+.menu-one ul li span {
+    font-size: 1.5rem;
+}
+
+.menu-one ul li a:hover {
+    background-color: var(--menu-active-bg);
+}
+
+.menu-one ul li small {
+    font-size: 0.8rem;
+}
+
+.menu-one ul .border {
+    background-color: var(--button-color);
+    width: 60%;
+    align-self: center;
+    height: 2px;
+    border-radius: 2px;
+}
+
+.conversation {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 90%;
+}
+
+.conversation div {
+    display: flex;
+    gap: 2rem;
+}
+
+.conversation .dark {
+    display: flex;
+    color: #121331;
+    font-size: 33px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    align-self: center;
+}
+
+.conversation .light {
+    display: none;
+    color: #ffffff;
+    font-size: 33px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    align-self: center;
+}
+
+.conversation span lord-icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.view .main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.2s;
+}
+
+.row {
+    width: 23vw;
+    display: flex;
+    flex-direction: column;
+    background: #202329;
+    height: 100%;
+    padding: var(--padding);
+    gap: 1rem;
+}
+
+.row .searchbar {
+    width: 80%;
+    height: max-content;
+    display: flex;
+    align-self: center;
+    background-color: var(--menu-active-bg);
+    border-radius: 13px;
+    padding: 5px;
+}
+
+.row .searchbar #search {
+    color: var(--button-color);
+}
+
+.row .searchbar input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.chats {
+    display: flex;
+    height: 90vh;
+    flex-direction: column;
+    gap: .5rem;
+    overflow-y: scroll;
+}
+
+.chats #opened{
+    background-color: var(--menu-active-bg);
+}
+
+.main .chats .chat {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: .6rem;
+    align-self: center;
+    gap: .5rem;
+    width: 270px;
+    transition: var(--transition-color);
+    user-select: none;
+}
+
+.chats .chat:hover{
+    background-color: var(--menu-active-bg);
+}
+
+.chat .profile-photo {
+    min-width: 45px;
+    min-height: 45px;
+    height: 45px;
+    width: 45px;
+    background-size: cover;
+    border-radius: 15px;
+    overflow: hidden;
+    align-self: center;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+}
+
+.chat .author {
+    align-self: center;
+    display: flex;
+    flex-grow: 1;
+    gap: .2rem;
+    flex-direction: column;
+}
+
+.chat .author .name {
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.chat .author .message {
+    color: rgb(163, 163, 163);
+    font-size: 0.9rem;
+}
+
+
+.chat .sent-or-come span {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: flex-end;
+    height: 100%;
+}
+
+.sent-or-come span .mute {
+    background-color: var(--active-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: .5rem;
+    color: var(--text-color);
+    font-size: .9rem;
+    height: 20px;
+    width: 20px;
+}
+
+.chat .sent-or-come span small {
+    color: rgb(163, 163, 163);
+}
+
+.right-side{
+    flex-grow: 1;
+    padding: 1rem;
+    height: 100%;
+    background: var(--menu-bg-color);
+}
+
+.titlechat{
+    background: #202329;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--button-color);
+    padding: 0 1rem;
+}
+
+.titlechat div:first-child{
+    display: flex;
+    flex-direction: column;
+}
+.titlechat div:first-child h3{
+    color: var(--text-color);
+}
+
+
+.titlechat div:last-child{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.titlechat div:last-child span{
+    cursor: pointer;
+}
+
+#section2,
+#section3,
+#section4,
+#section5,
+#section6{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: var(--radius);
+    padding: .6rem;
+    align-self: center;
+    gap: .5rem;
+    width: 270px;
+    transition: var(--transition-color);
+    user-select: none;
+}
+.row .add {
+    display: flex;
+    background-color: var(--menu-active-bg);
+    padding: 6px 20px;
+    align-self: center;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.add .icon {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    color: var(--text-color);
+}
+
+.add h4 {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.adding_popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 400px;
+    height: max-content;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: #ebeefc;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 0 15px #c8cad7;
+    z-index: -5;
+    opacity: 0;
+}
+
+/* .adding_popup::after {
+    content: '';
+    background-color: #9a9ba5;
+    filter: blur(20px);
+    height: 15px;
+    width: 90%;
+    position: absolute;
+    bottom: -15px;
+    border-radius: 50%;
+} */
+
+.adding_popup .title {
+    align-self: center;
+    color: rgb(20, 20, 20);
+}
+
+.adding_popup p {
+    color: rgb(65, 64, 64);
+    margin-left: 6px;
+}
+
+.adding_popup input {
+    border: 1px solid lightgray;
+    outline: none;
+    height: 30px;
+    width: 100%;
+    padding: 24px 14px;
+    border-radius: 5px;
+    color: rgb(100, 100, 100);
+    font-size: 15px;
+}
+
+.adding_popup input::placeholder {
+    font-weight: 400;
+}
+
+.adding_popup button:hover {
+    background-color: #2a98ff;
+}
+
+.function {
+    display: flex;
+    gap: .5rem;
+}
+
+.function button {
+    border: none;
+    height: 50px;
+    width: 100%;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: #0068c9;
+    color: white;
+}
+
+.function .cancel {
+    border: none;
+    height: 50px;
+    width: 100%;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(203, 0, 0);
+    color: white;
+}
+
+.function .cancel:hover {
+    background-color: rgb(255, 34, 34);
+}
+
+label {
+    cursor: pointer;
+    background-color: #999;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+
+#upload {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#my-popup {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: .2s;
+    position: absolute;
+    z-index: -2;
+}
+/* ========TEXT-FIELD */
+.text-field {
+    width: 50vw;
+    display: flex;
+    justify-content: space-between;
+    background: blue;
+    height: 100vh;
+}
+
+.field-row{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100%;
+    position: relative;
+}
+
+.enterMessage {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    align-items: center;
+    padding: 1rem 1.2rem 1rem 0;
+    background-color: var(--fields-bg);
+}
+
+.messageField {
+    display: flex;
+    flex-shrink: 1;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+    overflow-y: auto;
+    background-color: var(--fields-bg);
+    /*background: red;*/
+    height: 100%;
+}
+
+.messageField::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.enter-row {
+    display: flex;
+}
+
+.attach {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(158, 158, 158);
+    cursor: pointer;
+}
+
+.attach:hover {
+    color: #0083ff;
+}
+
+label.label input[type="file"] {
+    position: absolute;
+    top: -1000px;
+    z-index: -5;
+}
+
+.label {
+    cursor: pointer;
+    background-color: transparent;
+    user-select: none;
+    width: 10px;
+    gap: 10px;
+}
+
+.enter {
+    border: none;
+    outline: none;
+    width: 150px;
+    font-size: 1rem;
+    color: var(--button-color);
+    font-weight: 600;
+    background-color: transparent;
+    padding: 0 .34rem;
+}
+
+.enter::placeholder {
+    color: rgb(158, 158, 158);
+    font-weight: 400;
+}
+
+.voice {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: rgb(158, 158, 158);
+    cursor: pointer;
+    user-select: none;
+    align-items: center;
+}
+
+.send {
+    flex-direction: column;
+    justify-content: center;
+    color: #0083ff;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sms {
+    color: #0083ff;
+    font-weight: 500;
+    background-color: #dcebff;
+    width: max-content;
+    height: max-content;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 15px;
+    border-radius: 20px 20px 5px 20px;
+}
+
+.details{
+    background-color: black;
+    width: 100%;
+    height: 100px;
+}
+
+#search-popup{
+    position: absolute;
+    top: 40px;
+    border-radius: var(--radius);
+    left: 0;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    height: max-content;
+    width: 100%;
+    background: var(--button-color);
+    opacity: 1;
+    z-index: -1;
+    transition: .3s;
+    color: var(--text-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
