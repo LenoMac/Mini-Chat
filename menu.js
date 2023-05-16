@@ -12,6 +12,13 @@ let btnSection1 = document.getElementById('btn-section1'),
     section6 = document.getElementById('section6'),
     field1 = document.getElementById('field-1')
 
+function show(i){
+    i.style.cssText = "opacity: 1; z-index: 1;"
+}
+function hide(j){
+    j.style.cssText = "opacity: 0; z-index: -1;"
+}
+
 let arrOfButtons = [btnSection1, btnSection2, btnSection3, btnSection4, btnSection5, btnSection6]
 let arrOfSections = [section1, section2, section3, section4, section5, section6]
 function switchSection(event) {
@@ -20,39 +27,32 @@ function switchSection(event) {
     for (let value of arrOfButtons) {
         value.classList.remove('chosen')
         for (let i of arrOfSections) {
-            i.style.opacity = '0'
-            i.style.zIndex = '-1'
+            hide(i)
         }
     }
 
     if (btnId === 'btn-section1') {
-        section1.style.opacity = '1'
-        section1.style.zIndex = '1'
+        show(section1)
         btnSection1.classList.add('chosen')
     }
     else if (btnId === 'btn-section2') {
-        section2.style.opacity = '1'
-        section2.style.zIndex = '1'
+        show(section2)
         btnSection2.classList.add('chosen')
     }
     else if (btnId === 'btn-section3') {
-        section3.style.opacity = '1'
-        section3.style.zIndex = '1'
+        show(section3)
         btnSection3.classList.add('chosen')
     }
     else if (btnId === "btn-section4") {
-        section4.style.opacity = '1'
-        section4.style.zIndex = '1'
+        show(section4)
         btnSection4.classList.add('chosen')
     }
     else if (btnId === "btn-section5") {
-        section5.style.opacity = '1'
-        section5.style.zIndex = '1'
+        show(section5)
         btnSection5.classList.add('chosen')
     }
     else if (btnId === "btn-section6") {
-        section6.style.opacity = '1'
-        section6.style.zIndex = '1'
+        show(section6)
         btnSection6.classList.add('chosen')
     }
 }
@@ -87,10 +87,9 @@ let addChats = function (profile, authorName, authorMessage, time, notification)
 
 }
 chats.insertAdjacentHTML("beforeend", addChats("https://cdn.mos.cms.futurecdn.net/hKX2Uqg2giQikXUekiPNaC-1200-80.jpg", "Mom", "Be carefull", "29 sec", "4"))
-chats.insertAdjacentHTML("beforeend", addChats("https://cdn.mos.cms.futurecdn.net/hKX2Uqg2giQikXUekiPNaC-1200-80.jpg", "Office Chat", "I wanna ask you to pick", "15 m", "2"))
 chats.insertAdjacentHTML("beforeend", addChats("./img/profile-2.jpg", "Harry Fattel", "Our company needs to...", "6 m", "1"))
-chats.insertAdjacentHTML("beforeend", addChats("", "Bory", "Aliekum salam", "1 d", ""))
-chats.insertAdjacentHTML("beforeend", addChats("", "Bory", "Салам алейкум", "29 sec", ""))
+chats.insertAdjacentHTML("beforeend", addChats("./img/profile-2.jpg", "Bory", "Aliekum salam", "1 day", ""))
+chats.insertAdjacentHTML("beforeend", addChats("./img/profile-2.jpg", "Bory", "Салам алейкум", "29 sec", ""))
 
 
 let chatsAll = document.querySelectorAll('.chats .chat')
